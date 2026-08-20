@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Birthday Tannishtha! 🎂🎉</title>
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Confetti Canvas -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <!-- Ambient Glowing Background -->
+    <div class="ambient-lights">
+      <div class="glow-orb glow-orb-1"></div>
+      <div class="glow-orb glow-orb-2"></div>
+      <div class="glow-orb glow-orb-3"></div>
+    </div>
+
+    <!-- Cinematic Cover Page Overlay (Page 1) -->
+    <div class="cover-overlay" id="cover-overlay">
+      <div class="cover-card-wrapper">
+        <div class="cover-content">
+          <!-- Left Side: Video Masked Block Typography -->
+          <div class="cover-left">
+            <div class="cover-tag">
+              <i class="fa-solid fa-sparkles"></i> Special Birthday Edition
+            </div>
+            <div class="video-text-box">
+              <h1 class="cover-h1">
+                HAPPY BIRTHDAY<br />
+                <span class="highlight-name">TANNISHTHA</span>
+              </h1>
+              <video
+                id="cover-video"
+                class="cover-video"
+                src="mha1.mp4"
+                autoplay
+                loop
+                muted
+                playsinline
+                preload="auto"
+              ></video>
+            </div>
+          </div>
+
+          <!-- Right Side: Deku Image -->
+          <div class="cover-right">
+            <div class="deku-frame">
+              <img src="deku.png" alt="Deku" class="deku-img" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Right Next Page Button -->
+        <button
+          class="cover-next-btn"
+          id="cover-next-btn"
+          title="Open Birthday Album"
+        >
+          <span>Next Page</span>
+          <i class="fa-solid fa-arrow-right-long"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- 1st Arrival Pointer Hint to Cinematic Maximize Mode -->
+    <div class="hint-pointer" id="hint-pointer">
+      <div class="hint-bubble">
+        <span>Click for Fullscreen Cinematic Mode! 🎬</span>
+        <i class="fa-solid fa-arrow-down-long hint-arrow"></i>
+      </div>
+    </div>
+
+    <!-- App Wrapper (Page 2) -->
+    <div class="app-container">
+      <!-- Birthday Header -->
+      <header class="header">
+        <h1>Happy Birthday Tannistha! 🎉</h1>
+        <p>
+          <span class="badge"
+            ><i class="fa-solid fa-heart"></i> Memory Album</span
+          >
+          <span>Drag photos, flip for notes, or spread out the pile!</span>
+        </p>
+      </header>
+
+      <!-- Stage (Interactive Photo Playground) -->
+      <main class="stage" id="stage">
+        <!-- Digital Photograph Cards will be dynamically injected & managed here -->
+      </main>
+
+      <!-- Floating Control Toolbar -->
+      <nav class="toolbar" id="toolbar">
+        <div class="tool-group">
+          <button
+            class="tool-btn active"
+            id="btn-mode-pile"
+            title="Pile View (Stacked)"
+          >
+            <i class="fa-solid fa-layer-group"></i> <span>Pile</span>
+          </button>
+          <button class="tool-btn" id="btn-mode-scatter" title="Scatter View">
+            <i class="fa-solid fa-border-all"></i> <span>Scatter</span>
+          </button>
+          <button class="tool-btn" id="btn-mode-grid" title="Grid View">
+            <i class="fa-solid fa-table-cells"></i> <span>Grid</span>
+          </button>
+          <button class="tool-btn" id="btn-mode-fan" title="Fan View">
+            <i class="fa-solid fa-fan"></i> <span>Fan</span>
+          </button>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="tool-group">
+          <button class="tool-btn" id="btn-shuffle" title="Shuffle Stack">
+            <i class="fa-solid fa-shuffle"></i> <span>Shuffle</span>
+          </button>
+          <button
+            class="tool-btn highlight"
+            id="btn-confetti"
+            title="Blast Confetti"
+          >
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            <span>Celebrate!</span>
+          </button>
+          <button class="tool-btn" id="btn-audio" title="Toggle Birthday Sound">
+            <i class="fa-solid fa-volume-xmark" id="audio-icon"></i>
+            <span>Music</span>
+          </button>
+          <button class="tool-btn" id="btn-add" title="Add Image">
+            <i class="fa-solid fa-plus"></i>
+          </button>
+          <input
+            type="file"
+            id="file-input"
+            accept="image/*"
+            style="display: none"
+            multiple
+          />
+        </div>
+      </nav>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div class="modal-overlay" id="modal">
+      <!-- Glowing Navigation Buttons -->
+      <button
+        class="modal-nav-btn modal-prev-btn"
+        id="modal-prev-btn"
+        title="Previous Photo (Left Arrow)"
+      >
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+
+      <div class="modal-card">
+        <div class="modal-header">
+          <div>
+            <h3 id="modal-title">Memory Detail</h3>
+            <span
+              id="modal-counter"
+              style="
+                font-size: 0.8rem;
+                color: #888;
+                display: block;
+                margin-top: 2px;
+              "
+              >Photo 1 of 5</span
+            >
+          </div>
+          <button class="modal-close" id="modal-close">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <img id="modal-img" class="modal-img" src="" alt="Memory preview" />
+        <label
+          style="
+            font-size: 0.85rem;
+            color: #555;
+            margin-bottom: 6px;
+            display: block;
+            font-weight: 500;
+          "
+          >Memory Note on Back:</label
+        >
+        <textarea
+          id="modal-note-input"
+          class="edit-input"
+          rows="3"
+          placeholder="Enter a special wish or memory note..."
+        ></textarea>
+        <div style="display: flex; justify-content: flex-end; gap: 8px">
+          <button
+            class="flip-back-btn"
+            id="modal-save-btn"
+            style="padding: 8px 16px; font-size: 0.9rem"
+          >
+            Save Note
+          </button>
+        </div>
+      </div>
+
+      <button
+        class="modal-nav-btn modal-next-btn"
+        id="modal-next-btn"
+        title="Next Photo (Right Arrow)"
+      >
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast" id="toast">Special Birthday Toast</div>
+
+    <!-- Audio track for cover page (My Hero Academia theme) -->
+    <audio id="cover-music" src="mha.mov" loop autoplay preload="auto"></audio>
+
+    <!-- Audio element for Happy Birthday track (Album page) -->
+    <audio id="bg-music" src="Hb2.mp3" loop preload="auto"></audio>
+
+    <!-- Main JavaScript File -->
+    <script src="index.js"></script>
+  </body>
+</html>
