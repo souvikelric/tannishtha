@@ -28,8 +28,10 @@
 html,
 body {
   width: 100%;
-  height: 100%;
-  overflow: hidden;
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   font-family:
     "Outfit",
     -apple-system,
@@ -42,6 +44,10 @@ body {
     var(--bg-gradient-end) 100%
   );
   color: var(--text-light);
+}
+
+body {
+  min-height: 100vh;
 }
 
 /* Background Ambient Glow & Particles */
@@ -118,13 +124,15 @@ body {
 .app-container {
   position: relative;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   z-index: 2;
   padding: 1.5rem 1.5rem 2rem 1.5rem;
+  overflow: visible;
 }
 
 /* Header */
@@ -740,13 +748,31 @@ body {
   .img-container {
     height: 200px;
   }
+  .app-container {
+    padding: 1rem 0.75rem 1rem;
+  }
   .toolbar {
-    padding: 0.4rem 0.8rem;
-    gap: 0.4rem;
+    width: min(100%, 430px);
+    max-width: 100%;
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding: 0.5rem 0.45rem;
+    gap: 0.35rem;
+    border-radius: 22px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .tool-group {
+    flex-wrap: nowrap;
+    min-width: max-content;
+  }
+  .divider {
+    display: none;
   }
   .tool-btn {
     padding: 0.4rem 0.7rem;
     font-size: 0.75rem;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
 }
 
@@ -765,7 +791,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   perspective: 2500px;
   transform-style: preserve-3d;
   transform-origin: 0% 50%;
@@ -785,11 +812,12 @@ body {
 .cover-card-wrapper {
   position: relative;
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 3rem 5rem;
+  padding: 3rem 5rem 7rem 5rem;
   background: #ffffff;
   background-image: radial-gradient(#e2e8f0 1.5px, transparent 1.5px);
   background-size: 28px 28px;
@@ -985,13 +1013,14 @@ body {
 
 @media (max-width: 850px) {
   .cover-card-wrapper {
-    padding: 1.5rem 1.5rem 6rem 1.5rem;
-    overflow-y: auto;
+    padding: 1.5rem 1.5rem 8rem 1.5rem;
+    overflow-y: visible;
   }
   .cover-content {
     flex-direction: column-reverse;
     text-align: center;
     gap: 1.8rem;
+    padding-bottom: 4rem;
   }
   .cover-left {
     align-items: center;
@@ -1069,7 +1098,9 @@ body {
   pointer-events: none;
   opacity: 0;
   transform: translateY(-10px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1089,7 +1120,9 @@ body {
   border-radius: 20px;
   font-size: 0.8rem;
   font-weight: 700;
-  box-shadow: 0 8px 25px rgba(255, 0, 85, 0.5), 0 0 15px rgba(121, 40, 202, 0.4);
+  box-shadow:
+    0 8px 25px rgba(255, 0, 85, 0.5),
+    0 0 15px rgba(121, 40, 202, 0.4);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1109,13 +1142,23 @@ body {
 }
 
 @keyframes floatHint {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
 }
 
 @keyframes bounceArrow {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(4px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(4px);
+  }
 }
 
 /* Pulsing highlight effect on the zoom button when hint is active */
@@ -1124,10 +1167,21 @@ body {
   background: #ff0055 !important;
   color: white !important;
   transform: scale(1.3) !important;
-  box-shadow: 0 0 20px #ff0055, 0 0 35px #7928ca !important;
+  box-shadow:
+    0 0 20px #ff0055,
+    0 0 35px #7928ca !important;
 }
 
 @keyframes btnGlowPulse {
-  0%, 100% { box-shadow: 0 0 15px #ff0055, 0 0 25px #7928ca; }
-  50% { box-shadow: 0 0 25px #ffd166, 0 0 45px #ff0055; }
+  0%,
+  100% {
+    box-shadow:
+      0 0 15px #ff0055,
+      0 0 25px #7928ca;
+  }
+  50% {
+    box-shadow:
+      0 0 25px #ffd166,
+      0 0 45px #ff0055;
+  }
 }
