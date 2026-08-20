@@ -1013,14 +1013,15 @@ body {
 
 @media (max-width: 850px) {
   .cover-card-wrapper {
-    padding: 1.5rem 1.5rem 8rem 1.5rem;
-    overflow-y: visible;
+    padding: 1.25rem 1.25rem 5.5rem 1.25rem;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
   .cover-content {
     flex-direction: column-reverse;
     text-align: center;
-    gap: 1.8rem;
-    padding-bottom: 4rem;
+    gap: 1.4rem;
+    padding-bottom: 3rem;
   }
   .cover-left {
     align-items: center;
@@ -1046,11 +1047,11 @@ body {
     max-height: 260px;
   }
   .cover-next-btn {
-    bottom: 1.5rem;
+    bottom: 0.8rem;
     right: 50%;
     transform: translateX(50%);
-    padding: 0.95rem 2.2rem;
-    font-size: 1.05rem;
+    padding: 0.85rem 1.8rem;
+    font-size: 1rem;
     width: max-content;
   }
   .cover-next-btn:hover {
